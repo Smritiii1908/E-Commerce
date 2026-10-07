@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Shop thoughtfully chosen everyday goods at North & Co.">
+  <title>North & Co. — Good things, well chosen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="announcement">Complimentary shipping on orders over $100</div>
+  <header class="site-header"><a class="brand" href="#top">north<span>&</span>co.</a><nav><a href="#shop">Shop</a><a href="#story">Our story</a></nav><button class="cart-trigger" id="open-cart" aria-label="Open shopping bag">Bag <span id="cart-count">0</span></button></header>
+  <main id="top">
+    <section class="hero"><div class="hero-copy"><p class="eyebrow">THE EVERYDAY EDIT · 2026</p><h1>Good things,<br><em>well chosen.</em></h1><p>Thoughtful finds for the way you live, work, and unwind.</p><a class="button dark" href="#shop">Explore the collection <span>↗</span></a></div><div class="hero-image" role="img" aria-label="A calm, sunlit modern home"></div><span class="hero-note">MADE FOR THE MOMENTS IN BETWEEN</span></section>
+    <section class="shop-section" id="shop"><div class="section-heading"><div><p class="eyebrow">A FEW FAVORITES</p><h2>Find your new <em>everyday.</em></h2></div><p>Useful, beautiful, and made to be lived with.</p></div>
+      <div class="filters" id="filters"><button class="filter active" data-category="All">Everything</button><button class="filter" data-category="Tech">Tech</button><button class="filter" data-category="Accessories">Accessories</button><button class="filter" data-category="Style">Style</button><button class="filter" data-category="Home">Home</button></div>
+      <div class="product-grid">{% for product in products %}<article class="product-card" data-category="{{ product.category }}"><div class="product-image-wrap"><img src="{{ product.image }}" alt="{{ product.name }}" loading="lazy"><span class="product-category">{{ product.category }}</span><button class="quick-add" data-product="{{ product.id }}">Add to bag <span>+</span></button></div><div class="product-info"><h3>{{ product.name }}</h3><span>${{ '%.2f'|format(product.price) }}</span></div><p class="product-description">{{ product.description }}</p></article>{% endfor %}</div>
+    </section>
+    <section class="story" id="story"><div class="story-photo"></div><div class="story-copy"><p class="eyebrow">A LITTLE LESS, A LITTLE BETTER</p><h2>Keep what<br>feels <em>right.</em></h2><p>We believe the things we use every day deserve a little more thought. North & Co. brings together well-made essentials that earn their place in your home.</p><a href="#shop" class="text-link">Meet your next favorite <span>→</span></a></div></section>
+  </main>
+  <footer><a class="brand" href="#top">north<span>&</span>co.</a><p>Good things for everyday life.</p><small>© 2026 North & Co.</small></footer>
+  <div class="overlay" id="overlay"></div><aside class="cart-drawer" id="cart-drawer" aria-label="Shopping bag" aria-hidden="true"><div class="drawer-header"><div><p class="eyebrow">YOUR SELECTION</p><h2>Your bag <span id="drawer-count">(0)</span></h2></div><button id="close-cart" class="icon-button" aria-label="Close bag">×</button></div><div id="cart-items" class="cart-items"></div><div class="cart-footer"><div class="subtotal"><span>Subtotal</span><strong id="cart-total">$0.00</strong></div><p class="shipping-note">Shipping and taxes calculated at checkout.</p><form id="checkout-form"><input name="name" placeholder="Full name" required maxlength="100"><input name="email" type="email" placeholder="Email address" required><textarea name="address" placeholder="Delivery address" required maxlength="300"></textarea><button class="button dark checkout-button" type="submit">Place order <span>→</span></button></form><p class="checkout-message" id="checkout-message" role="status"></p><small class="demo-note">Demo checkout: this stores an order but does not charge a payment method.</small></div></aside>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body></html>
